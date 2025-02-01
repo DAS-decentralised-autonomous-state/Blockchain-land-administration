@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaflet Map - Tank Bund NFT</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+</head>
+<body>
+    <div id="map" style="height: 500px;"></div>
+
+    <script>
+        // Initialize the map
+        var map = L.map('map').setView([17.4157, 78.4744], 15);  // Coordinates for Tank Bund, Hyderabad
+
+        // Add a tile layer to the map
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // JSON Data (representing your NFT and its location)
+        var nftData = {
+            "location": {
+                "lat": 17.4157,
+                "lon": 78.4744
+            },
+            "name": "Tank Bund Plot NFT",
+            "description": "A unique NFT for a land plot near Tank Bund, Hyderabad.",
+            "image": "https://i.seadn.io/s/raw/files/7d5d8f66582eba4a03893eeda6045030.jpg?auto=format&dpr=1&w=1000",  // Your image URL
+            "nft_link": "https://opensea.io/assets/matic/0x496b33c88242b9c8dd9fb5867011365684440df5/1/"
+        };
+
+        // Create a marker for the NFT location
+        var marker = L.marker([nftData.location.lat, nftData.location.lon]).addTo(map);
+
+        // Bind a popup with NFT information
+        marker.bindPopup(`
+            <b>${nftData.name}</b><br>
+            ${nftData.description}<br>
+            <img src="${nftData.image}" alt="NFT Image" style="width: 100%; max-width: 300px; height: auto;"><br>
+            <a href="${nftData.nft_link}" target="_blank">View on OpenSea</a>
+        `);
+    </script>
+</body>
+</html>
